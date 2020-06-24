@@ -2,11 +2,11 @@
 
 ## Introduction
 
-I've always been someone who follows politics at a presidential level but not a local level. I vote in general elections but am less likely to vote in midterm elections or primaries. However, local politicians are more likely to have an effect on your day-to-day life than the President. President Barack Obama said it best in his recent Medium post discussing the George Floyd killing. 
+I've always been someone who follows politics at a presidential level but not a local level. I vote in general elections but am less likely to vote in midterm elections or primaries. However, local politicians are more likely to have an effect on your day-to-day life than the President. President Barack Obama said it best in [his recent Medium post](https://medium.com/@BarackObama/how-to-make-this-moment-the-turning-point-for-real-change-9fa209806067) discussing the George Floyd killing. 
 
 > ...the elected officials who matter most in reforming police departments and the criminal justice system work at the state and local levels
 
-However, voter turnout for these elections are extremely low and the winner is usually decided by just a few thousand votes. Thus, in order to help myself better understand which local politicians I agree with, I decided to build this recommendation engine.
+However, voter turnout for these elections are extremely low and the winner is usually decided by just a few thousand votes. Thus, in order to help myself better understand which local politicians I agree with, I decided to build this recommendation engine. You try it out here: https://politician-recommender.herokuapp.com/
 
 
 ## Objective
