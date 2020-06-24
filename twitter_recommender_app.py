@@ -39,11 +39,6 @@ with open("all_counties_vectorized.pkl", "rb") as f:
 with open("main_politicians_vectorized.pkl", "rb") as f:
     main_politicians_vectorized = pickle.load(f)
 
-# An example of routing:
-# If they go to the page "/" (this means a GET request
-# to the page http://127.0.0.1:5000/), return a simple
-# page that says the site is up!
-
 @app.route("/", methods=["POST", "GET"])
 def whole_enchilada(user_input=True, top_words=True, top_words_amount=200):
     
@@ -83,20 +78,9 @@ def whole_enchilada(user_input=True, top_words=True, top_words_amount=200):
 
     #getting the recommendation for each political contest in the county
     dataframes,candidates_to_vote_for = recommendation(complete_table=complete_table, personal_handle=personal_handle,num_tweets=number_tweets_dict)
-
-    #plotting each politician's twitter profile in 2 dimensions 
-    #reduced_data = PCA(n_components=2).fit_transform(full_politician_df)
-    #results = pd.DataFrame(reduced_data,columns=['pca1','pca2'],index=full_politician_df.index)
-    
-    #plt.figure(figsize=(12,8))
-    #sns.scatterplot(x="pca1", y="pca2", s=200,hue=results.index, data=results)
-    #plt.title('Political Spectrum')
-    #plt.show()
     
     return flask.render_template('twitter_recommender.html', dataframes=dataframes,
     	personal_handle=personal_handle,county_name=county_name, candidates_to_vote_for=candidates_to_vote_for)
-
-
 
 
 if __name__=="__main__":

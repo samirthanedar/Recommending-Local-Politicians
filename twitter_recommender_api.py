@@ -110,7 +110,8 @@ def create_sentiment_vectors(list_of_tweets,handle,word=None):
 def get_politician_vectors(twitter_handle, user_input=False,top_words=False,top_words_amount=200):
     """
     Purpose: Take politician tweets from last year and turn it vector of words 
-    Arguments: Twitter handle in string
+    Arguments: Twitter handle in string, user_input boolean which is true if user input is being accepted, 
+    top_words boolean which is true if sentiment analysis is being done on tweets with top words, top_words_amount
     Returns: Dataframe with vector
     """
 
@@ -162,7 +163,8 @@ def compile_politician_df(politician_df, personal_handle, main_politicians_vecto
     """
     Purpose: Add the twitter username inputted by the user into the full politician dataframe
     Arguments: the existing dataframe with vectors for each politician in the county, the personal twitter username to 
-    add to the list, the exisiting number of tweets dictionary, user_input boolean determining if we should scrape 
+    add to the list, some saved vectors for popular politicians that I was testing with, 
+    the exisiting number of tweets dictionary, user_input boolean determining if we should scrape 
     twitter or not, and then two more variables that tells the function whether or not to include sentiment or not.
     Returns: the full dataframe and a dictionary showing how many tweets each politician had
     """
@@ -209,7 +211,13 @@ def create_similarity_matrix(similarity_tool,df_vectors,personal_handle):
     return df
 
 def scrape_tweets(twitter_handle):
+    """
+    Purpose: Scrape tweets from 03/2019 to 03/2020 for an inputted twitter handle
+    Arguments: twitter handle in a string
+    Returns: a pandas series of tweets
+    """
 
+    #using the GetOldTweets API
     tweetCriteria = got.manager.TweetCriteria().setUsername(twitter_handle)\
                                            .setSince("2019-03-03")\
                                            .setUntil("2020-03-03").setMaxTweets(1000)
@@ -224,6 +232,12 @@ def scrape_tweets(twitter_handle):
     return result
 
 def get_similarities(twitter_handle,politician_df,similarity_tool):
+    """
+    Purpose: sorts similarties based on which similarity tool is being used
+    Arguments: personal twitter handle, a dataframe with vectors, and similarity_tool: cosine similarity or euclidean distance
+    Returns: a sorted dataframe with the most similar politicians being at the top
+    """
+
     sim_df = create_similarity_matrix(similarity_tool,politician_df,twitter_handle)
     if similarity_tool == cosine_similarity:
         return sim_df[twitter_handle].sort_values(ascending=False)
@@ -237,7 +251,8 @@ def recommendation(complete_table, personal_handle, num_tweets):
     Arguments: complete_table = a dataframe of all politicians in the county with similarity metric,
     twitter_handles and number of tweets already added, personal_handle = the twitter usename for the profile
     we are comparing to politicians
-    Returns: a list of lists corresponding to a single recommendation for each contest
+    Returns: a list of dataframes showing the full results for each contest and a list of lists 
+    corresponding to a single recommendation for each contest 
 
     """
     dataframes = []
@@ -264,29 +279,9 @@ def recommendation(complete_table, personal_handle, num_tweets):
             candidates_to_vote_for.append(candidate_contest)
             dataframes.append([contest,df.to_html()])
 
+            #for debugging purposes
             print(contest)
             print(full_df[['COUNTY_NAME','CANDIDATE_NAME', 'PARTY_NAME', personal_handle, 'number_of_tweets']])
             print('\n')
 
     return dataframes,candidates_to_vote_for
-
-
-
-
-
-# This section checks that the prediction code runs properly
-# To run, type "python predictor_api.py" in the terminal.
-#
-# The if __name__='__main__' section ensures this code only runs
-# when running this file; it doesn't run when importing
-#if __name__ == '__main__':
-    #from pprint import pprint
-    #print("Checking to see what setting all params to 0 predicts")
-    #features = {f: '0' for f in feature_names}
-    #print('Features are')
-    #pprint(features)
-
-    #x_input, probs = make_prediction(features)
-    #print(f'Input values: {x_input}')
-    #print('Output probabilities')
-    #pprint(probs)
