@@ -2,11 +2,11 @@
 
 ## Introduction
 
-I've always been someone who follows politics at a presidential level but not a local level. I vote in general elections but am less likely to vote in midterm elections or primaries. However, local politicians are more likely to have an effect on your day-to-day life than the President. President Barack Obama said it best in [his recent Medium post](https://medium.com/@BarackObama/how-to-make-this-moment-the-turning-point-for-real-change-9fa209806067) discussing the George Floyd killing. 
+I've always been someone who follows politics at a presidential level but not a local level. I vote in general elections but am less likely to vote in midterm elections or primaries. However, local politicians are arguably more impactful on your day-to-day life than the President. President Barack Obama said it best in [his recent Medium post](https://medium.com/@BarackObama/how-to-make-this-moment-the-turning-point-for-real-change-9fa209806067) discussing the George Floyd killing. 
 
 > ...the elected officials who matter most in reforming police departments and the criminal justice system work at the state and local levels
 
-However, voter turnout for these elections are extremely low and the winner is usually decided by just a few thousand votes. Thus, in order to help myself better understand which local politicians I agree with, I decided to build this recommendation engine. You try it out here: https://politician-recommender.herokuapp.com/. Please note each recommendation may take 15-20 seconds to load. 
+However, he goes on to mention that voter turnout for these elections are extremely low and the winner is usually decided by just a few thousand votes. Thus, in order to help myself better understand which local politicians I agree with, I decided to build this recommendation engine. You try it out here: https://politician-recommender.herokuapp.com/. Please note each recommendation may take 15-20 seconds to load. 
 
 
 ## Objective
@@ -20,7 +20,7 @@ I used GetOldTweets3 API to scrape tweets from 66 politicians. For each politici
 
 ## Findings:
 
-The model was able to separate democrats and republicans well and thus for moderate candidates it produces adequate recommendations. Sentiment analysis helps make better recommendations in most cases. However, the model with sentiment sometimes struggles to place far right and far left politicians. Occassionaly even, a far left person will get a recommendation to vote for a far right person. I think perhaps far left and far right people are both expressing a similar sentiment: distaste of the status quo government and for that reason the model thinks they are similar. Finally, the model does tend to be biased towards recommending democrats because there are more democratic politicians in the Bay Area and the democrats here tend to have more tweets than the republicans.
+The model was able to separate democrats and republicans well and thus for moderate candidates it produces adequate recommendations. Sentiment analysis helps make better recommendations in most cases. However, the model with sentiment sometimes struggles to place far right and far left politicians. Occassionaly even, a far left person will get a recommendation to vote for a far right person. I think perhaps far left and far right people are both expressing a similar sentiment: distaste of the status quo government and for that reason the model thinks they are similar. Finally, the model tends to be biased towards recommending democrats because there are more democratic politicians in the Bay Area and the democrats in the region tend to have more tweets than the republicans.
 
 
 ## Navigating the Project Files:
@@ -32,5 +32,5 @@ You should follow the following workflow when going through my work to repeat th
 
 I've also included two jupyter notebooks showing how I built the NLP pipeline and how I tested my results. You should start with project_5_politician_groups-w_sentiment_analysis.ipynb and then move to project_5_recommendation_engine. 
 
-Finally, I have also included pickle files that has some of the data saved so the model runs faster.
+Finally, I have also included pickle files that has some of the data saved so the model runs faster. I have also saved all the tweets in a CSV for each politician in the Bay Area.
 
